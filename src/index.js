@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './Pages/Login';
-import './styles/index.scss';
 import 'antd/dist/antd.css';
+
+import _Sider from './routes/Sider';
+
+import './styles/index.scss';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Login/>
+      <_Sider/>
   </React.StrictMode>,
   document.getElementById('root')
 );

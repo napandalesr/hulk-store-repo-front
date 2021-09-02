@@ -7,6 +7,8 @@ import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import './style.scss';
 import CustomButton from '../Components/CustomButtom';
+import { Link } from 'react-router-dom';
+import { _ROUTES } from '../../utils/constants';
 
 const LoginForm = ({onFinish}) => {
   return <div className='loginForm'>
@@ -22,7 +24,7 @@ const LoginForm = ({onFinish}) => {
       <Form.Item
         label="Usuario"
         name="username"
-        rules={[{ required: true, message: 'Please input your username!' }]}
+        rules={[{ required: true, message: 'Por favor ingrese su nombre de usuario!' }]}
       >
         <Input addonBefore={<FontAwesomeIcon className='icon' icon={faUser}/>} className='inputLogin'/>
       </Form.Item>
@@ -30,7 +32,7 @@ const LoginForm = ({onFinish}) => {
       <Form.Item
         label="Contraseña"
         name="password"
-        rules={[{ required: true, message: 'Please input your password!' }]}
+        rules={[{ required: true, message: 'Por favor ingrese su contraseña!' }]}
       >
         <Input.Password addonBefore={<FontAwesomeIcon className='icon' icon={faKey}/>} className='inputLogin'/>
       </Form.Item>
@@ -42,12 +44,10 @@ const LoginForm = ({onFinish}) => {
         </Col>
         <Col span={8} offset={3}>
         <Form.Item name="remember" valuePropName="checked">
-        Registrarme
-      </Form.Item>
+          <Link to={_ROUTES.register} >Registrarme</Link>
+        </Form.Item>
         </Col>
       </Row>
-      
-
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
         <CustomButton type="primary" htmlType="submit" text='Iniciar sesión' className='loginButton'/>
       </Form.Item>
