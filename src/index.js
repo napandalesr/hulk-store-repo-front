@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import Home from './Pages/Home';
+import Login from './Pages/Login';
+import './styles/index.scss';
+import 'antd/dist/antd.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home/>
+    <Login/>
   </React.StrictMode>,
   document.getElementById('root')
 );
