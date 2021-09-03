@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {
+    "semi": 2,
+    "react/display-name":"off",
+    "no-prototype-builtins":"off",
+    "react/jsx-key":"off"
+  },
+  "extends": [
+    "eslint:recommended", 
+    "plugin:react/recommended"
+  ]
+}

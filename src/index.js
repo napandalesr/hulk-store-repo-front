@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
-import Home from './Pages/Home';
+import 'antd/dist/antd.css';
+
+import _Sider from './routes/Sider';
+
+import './styles/index.scss';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home/>
+      <_Sider/>
   </React.StrictMode>,
   document.getElementById('root')
 );

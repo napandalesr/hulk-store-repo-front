@@ -1,0 +1,35 @@
+@import './../../styles/index.scss';
+
+.loginForm{
+  margin: auto;
+  width: 50vh;
+  background-color: $white;
+  border-radius: 10px;
+  padding: 10px 20px;
+  box-shadow: 0px 0px 15px rgba(124,123,123,1);
+}
+
+.loginButton {
+  background: -webkit-linear-gradient(90deg, $turquoise, $color-turquoise-secondary) !important;
+}
+
+.inputLogin {
+  background-color: $grey !important;
+  border-bottom: solid 2px $turquoise !important;
+}
+
+.inputLogin > .ant-input {
+  background-color: $grey !important;
+}
+
+.ant-input-group-addon{
+  background-color: $turquoise !important;
+}
+
+.icon{
+  color: white;
+}
+
+.loginForm > h2 {
+  text-align: center;
+}
