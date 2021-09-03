@@ -1,41 +1,26 @@
 import React from 'react';
 import { notification, Spin } from 'antd';
 
-import { getAll, post, patch, remove } from '../../api/module/Outputs';
-import { getAll as getAllByProducts } from '../../api/module/Products';
-import OutputsForm from '../../Containers/Outputs/Form';
-import OutputsList from '../../Containers/Outputs/List';
+import { getAll, post, patch, remove } from '../../api/module/Categories';
+import CategoriesForm from '../../Containers/Categories/Form';
+import CategoriesList from '../../Containers/Categories/List';
 
-const Outputs = () => {
+import './style.scss';
+
+const Categories = () => {
   const [loading, setLoading] = React.useState(false);
-  const [entries, setEntries] = React.useState(null);
-  const [products, setProducts] = React.useState(null);
+  const [categories, setCategories] = React.useState(null);
 
   React.useEffect(()=>{
-    getAllEntries();
-    getAllProducts();
+    getAllCategories();
   },[]);
 
-  const getAllEntries = async() => {
+  const getAllCategories = async() => {
     setLoading(true);
     try {
       const response = await getAll();
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
-        setEntries(response.data);
-        setLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
-  const getAllProducts = async() => {
-    setLoading(true);
-    try {
-      const response = await getAllByProducts();
-      if ([200, 201, 203, 204].indexOf(response.status) > -1){
-        setProducts(response.data);
+        setCategories(response.data);
         setLoading(false);
       }
     } catch (error) {
@@ -47,14 +32,13 @@ const Outputs = () => {
   const onFinish = async (data) => {
     setLoading(true);
     try {
-      data.idUser = parseInt(localStorage.getItem('userId'));
       const response = await post(data);
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
         notification.success({
           message: "Datos guardados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllCategories();
         setLoading(false);
       }
     } catch (error) {
@@ -66,14 +50,13 @@ const Outputs = () => {
   const update = async (id,data) => {
     setLoading(true);
     try {
-      data.costUnit=parseInt(data.costUnit);
       const response = await patch(id,data);
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
         notification.success({
           message: "Datos actualizados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllCategories();
         setLoading(false);
       }
     } catch (error) {
@@ -82,7 +65,7 @@ const Outputs = () => {
     }
   };
 
-  const deleteEntries = async (id) => {
+  const deleteCategory = async (id) => {
     setLoading(true);
     try {
       const response = await remove(id);
@@ -91,7 +74,7 @@ const Outputs = () => {
           message: "Datos eliminados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllCategories();
         setLoading(false);
       }
     } catch (error) {
@@ -102,14 +85,14 @@ const Outputs = () => {
 
   return <Spin spinning={loading}>
     <div className='main'>
-      <OutputsForm onFinish={onFinish}
-      products={products}/>
-      <OutputsList 
-      entries={entries} 
+      <CategoriesForm onFinish={onFinish}/>
+      <CategoriesList 
+      categories={categories} 
+      setCategories={setCategories} 
       update={update} 
-      deleteEntries={deleteEntries}/>
+      deleteCategory={deleteCategory}/>
     </div>
   </Spin>;
 };
 
-export default Outputs;
+export default Categories;

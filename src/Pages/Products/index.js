@@ -1,27 +1,27 @@
 import React from 'react';
 import { notification, Spin } from 'antd';
 
-import { getAll, post, patch, remove } from '../../api/module/Outputs';
-import { getAll as getAllByProducts } from '../../api/module/Products';
-import OutputsForm from '../../Containers/Outputs/Form';
-import OutputsList from '../../Containers/Outputs/List';
+import { getAll, patch, post, remove } from '../../api/module/Products';
+import { getAll as getAllByCategories } from '../../api/module/Categories';
+import ProductsForm from '../../Containers/Products/Form';
+import ProductsList from '../../Containers/Products/List';
 
-const Outputs = () => {
+const Products = () => {
   const [loading, setLoading] = React.useState(false);
-  const [entries, setEntries] = React.useState(null);
   const [products, setProducts] = React.useState(null);
+  const [categories, setCategories] = React.useState(null);
 
   React.useEffect(()=>{
-    getAllEntries();
     getAllProducts();
+    getAllCategories();
   },[]);
 
-  const getAllEntries = async() => {
+  const getAllProducts = async() => {
     setLoading(true);
     try {
       const response = await getAll();
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
-        setEntries(response.data);
+        setProducts(response.data);
         setLoading(false);
       }
     } catch (error) {
@@ -30,12 +30,13 @@ const Outputs = () => {
     }
   };
 
-  const getAllProducts = async() => {
+  const getAllCategories = async() => {
     setLoading(true);
     try {
-      const response = await getAllByProducts();
+      const response = await getAllByCategories();
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
-        setProducts(response.data);
+        console.log(response.data);
+        setCategories(response.data);
         setLoading(false);
       }
     } catch (error) {
@@ -47,14 +48,14 @@ const Outputs = () => {
   const onFinish = async (data) => {
     setLoading(true);
     try {
-      data.idUser = parseInt(localStorage.getItem('userId'));
+      data.idCategory=parseInt(data.idCategory);
       const response = await post(data);
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
         notification.success({
           message: "Datos guardados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllProducts();
         setLoading(false);
       }
     } catch (error) {
@@ -66,14 +67,13 @@ const Outputs = () => {
   const update = async (id,data) => {
     setLoading(true);
     try {
-      data.costUnit=parseInt(data.costUnit);
       const response = await patch(id,data);
       if ([200, 201, 203, 204].indexOf(response.status) > -1){
         notification.success({
           message: "Datos actualizados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllProducts();
         setLoading(false);
       }
     } catch (error) {
@@ -82,7 +82,7 @@ const Outputs = () => {
     }
   };
 
-  const deleteEntries = async (id) => {
+  const deleteProducts = async (id) => {
     setLoading(true);
     try {
       const response = await remove(id);
@@ -91,7 +91,7 @@ const Outputs = () => {
           message: "Datos eliminados correctamente",
           duration: 5,
         });
-        getAllEntries();
+        getAllProducts();
         setLoading(false);
       }
     } catch (error) {
@@ -102,14 +102,16 @@ const Outputs = () => {
 
   return <Spin spinning={loading}>
     <div className='main'>
-      <OutputsForm onFinish={onFinish}
-      products={products}/>
-      <OutputsList 
-      entries={entries} 
+      <ProductsForm onFinish={onFinish}
+      categories={categories}/>
+      <ProductsList 
+      products={products} 
+      setProducts={setProducts} 
       update={update} 
-      deleteEntries={deleteEntries}/>
+      deleteProducts={deleteProducts}
+      />
     </div>
   </Spin>;
 };
 
-export default Outputs;
+export default Products;
