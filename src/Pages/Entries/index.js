@@ -66,6 +66,7 @@ const Entries = () => {
   const update = async (id,data) => {
     setLoading(true);
     try {
+      data.units =parseInt(data.units);
       data.costUnit=parseInt(data.costUnit);
       const response = await patch(id,data);
       if ([200, 201, 203, 204].indexOf(response.status) > -1){

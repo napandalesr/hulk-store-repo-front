@@ -60,7 +60,7 @@ const OutputsForm = ({onFinish,products}) => {
           name="discount"
           rules={[{ required: true }]}
         >
-          <InputNumber />
+          <InputNumber value={0}/>
         </Form.Item>
       </Col>
       </Row>

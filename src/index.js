@@ -6,7 +6,6 @@ import _Sider from './routes/Sider';
 
 import './styles/index.scss';
 
-
 ReactDOM.render(
   <React.StrictMode>
       <_Sider/>

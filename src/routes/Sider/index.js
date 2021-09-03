@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import { Layout, Menu, Button } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -11,13 +11,15 @@ import {
   faShoppingBag,
   faSignInAlt,
   faSignOutAlt,
-  faHome
+  faHome,
+  faDoorOpen
  } from '@fortawesome/free-solid-svg-icons';
 
 import Routes from '..';
 
 import './style.scss';
 import { _ROUTES } from '../../utils/constants';
+import { LogOut } from '../../utils/Helpers/helpers';
 
 const { Header, Sider, Content } = Layout;
 
@@ -38,6 +40,9 @@ const _Sider = () => {
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
           <div className="logo"/>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+            <Menu.Item key="0" style={{height:'120px'}}>
+              <h1>Hulk<br/>Store</h1>
+            </Menu.Item>
             <Menu.Item key="1" icon={<FontAwesomeIcon icon={faHome} />}>
               <Link to={_ROUTES.home}>Inicio</Link>
             </Menu.Item>
@@ -51,7 +56,10 @@ const _Sider = () => {
               <Link to={_ROUTES.entries}>Entradas</Link>
             </Menu.Item>
             <Menu.Item key="5" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>
-            <Link to={_ROUTES.outputs}>Salidas</Link>
+              <Link to={_ROUTES.outputs}>Salidas</Link>
+            </Menu.Item>
+            <Menu.Item key="6" icon={<FontAwesomeIcon icon={faDoorOpen} />}>
+              <Button onClick={()=>LogOut()}>Salir</Button>
             </Menu.Item>
           </Menu>
         </Sider>
