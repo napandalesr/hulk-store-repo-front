@@ -4,10 +4,15 @@ import { Layout, Menu } from 'antd';
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
 } from '@ant-design/icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { 
+  faStream,
+  faShoppingBag,
+  faSignInAlt,
+  faSignOutAlt,
+  faHome
+ } from '@fortawesome/free-solid-svg-icons';
 
 import Routes from '..';
 
@@ -33,17 +38,20 @@ const _Sider = () => {
         <Sider trigger={null} collapsible collapsed={state.collapsed}>
           <div className="logo"/>
           <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <Menu.Item key="1" icon={<UserOutlined />}>
+            <Menu.Item key="1" icon={<FontAwesomeIcon icon={faHome} />}>
               <Link to={_ROUTES.home}>Inicio</Link>
             </Menu.Item>
-            <Menu.Item key="2" icon={<UserOutlined />}>
-              Productos
+            <Menu.Item key="2" icon={<FontAwesomeIcon icon={faShoppingBag} />}>
+              <Link to={_ROUTES.products}>Productos</Link>
             </Menu.Item>
-            <Menu.Item key="3" icon={<VideoCameraOutlined />}>
-              Entradas
+            <Menu.Item key="3" icon={<FontAwesomeIcon icon={faStream} />}>
+              <Link to={_ROUTES.categories}>Categorias</Link>
             </Menu.Item>
-            <Menu.Item key="4" icon={<UploadOutlined />}>
-              Salidas
+            <Menu.Item key="4" icon={<FontAwesomeIcon icon={faSignInAlt} />}>
+              <Link to={_ROUTES.entries}>Entradas</Link>
+            </Menu.Item>
+            <Menu.Item key="5" icon={<FontAwesomeIcon icon={faSignOutAlt} />}>
+            <Link to={_ROUTES.outputs}>Salidas</Link>
             </Menu.Item>
           </Menu>
         </Sider>

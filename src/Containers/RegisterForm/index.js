@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 
 import './style.scss';
-import CustomButton from '../Components/CustomButtom';
+import CustomButton from '../../Components/CustomButtom';
 import { Link } from 'react-router-dom';
 import { _ROUTES } from '../../utils/constants';
 
