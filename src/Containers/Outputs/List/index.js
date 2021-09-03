@@ -38,7 +38,7 @@ const EditableCell = ({
 };
 
 
-const OutputsList = ({categories, update, deleteCategory}) => {
+const OutputsList = ({entries, update, deleteCategory}) => {
   const [form] = Form.useForm();
   const [editingKey, setEditingKey] = useState('');
 
@@ -70,19 +70,33 @@ const OutputsList = ({categories, update, deleteCategory}) => {
   const columns = [
     {
       title: 'Nombre',
-      dataIndex: 'name',
-      width: '15%',
+      dataIndex: 'nameProduct',
+    },
+    {
+      title: 'Unidades',
+      dataIndex: 'units',
       editable: true,
     },
     {
-      title: 'Descripción',
-      dataIndex: 'description',
-      width: '35%',
+      title: 'Costo unitario',
+      dataIndex: 'costUnit',
       editable: true,
+    },
+    {
+      title: 'Costo total',
+      dataIndex: 'costTotal',
+      editable: true,
+    },
+    {
+      title: 'Usuario',
+      dataIndex: 'nameUser',
+      with:'10%',
     },
     {
       title: 'Acciones',
       dataIndex: 'Acciones',
+      fixed: 'right',
+      with:10,
       render: (_, record) => {
         const editable = isEditing(record);
         return <>
@@ -111,6 +125,7 @@ const OutputsList = ({categories, update, deleteCategory}) => {
       },
     },
   ];
+
   const mergedColumns = columns.map((col) => {
     if (!col.editable) {
       return col;
@@ -137,9 +152,10 @@ const OutputsList = ({categories, update, deleteCategory}) => {
         }}
         bordered
         rowKey='id'
-        dataSource={categories}
+        dataSource={entries}
         columns={mergedColumns}
         rowClassName="editable-row"
+        scroll={{ x: 1300 }}
         pagination={{
           onChange: cancel,
         }}
@@ -160,7 +176,8 @@ OutputsList.propTypes = {
   categories: Proptypes.array,
   setCategories: Proptypes.func,
   update: Proptypes.func,
-  deleteCategory: Proptypes.func
+  deleteCategory: Proptypes.func,
+  entries: Proptypes.array,
 };
 
 export default OutputsList;
